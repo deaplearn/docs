@@ -1,6 +1,6 @@
 # About Object Detector 
 
-> 	We use yolo-v3 to train custom tiny v3 model
+> 	We use darknet to train custom tiny v3 model
 
 > 	reference
 	https://github.com/deaplearn/darknet.git
@@ -21,7 +21,7 @@
 		$ python3 main.py downloader -y --classes classes.txt --image_IsGroupOf 0 --limit 10 --type_csv train
 		$ python3 main.py downloader -y --classes classes.txt --image_IsGroupOf 0 --limit 10 --type_csv validation
 		$ ./generateManifest.sh
-		$ cd demo_train && ./trainModel.sh	
+		$ cd demo_train && ./trainModel-tiny.sh	
 
 	
 	> 	If we download images from other site, use tool labelImg to label the images.
@@ -29,14 +29,14 @@
 	
 3. Train with v3-tiny config file and pre-trained model
 
-	> 	check script trainModel.sh on OIDv4_ToolKit/demo_train
+	> 	check script trainModel-tiny.sh on OIDv4_ToolKit/demo_train
 	
 
 4. Use opencv load trained model and it's config info to detect object.
 	
 	>	check https://github.com/deaplearn/yolo_opencv.git
 
-		$ ./detect.sh [*.jpg] [*.mp4] [live]
+		$ ./detect.sh [*.jpg | *.mp4]	[full | tiny | custom]
 
 
 5. Use opencv_createsamples to generate train images. Do as follow steps
@@ -72,7 +72,17 @@
 		*  Convert label info to yolo format.
 
 
+6. Synthesize tarin images by python-opencv
+	
+	> 	check simple_synthesize.py in https://github.com/deaplearn/image_sample.git
 
+		example:
+		$python3 simple_synthesize.py -bg ./neg/scale_100/ -t ./objects/scale/
+
+
+7. Test the model. check https://github.com/deaplearn/yolo_opencv.git
+	
+	>	Run ./detect.sh to test image/video 
 
 
 
