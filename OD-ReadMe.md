@@ -32,57 +32,32 @@
 	> 	check script trainModel-tiny.sh on OIDv4_ToolKit/demo_train
 	
 
-4. Use opencv load trained model and it's config info to detect object.
+
+4. Test the model. check https://github.com/deaplearn/yolo_opencv.git
 	
-	>	check https://github.com/deaplearn/yolo_opencv.git
+	>	$ ./detect.sh [*.jpg | *.mp4]	[full | tiny | custom]
 
-		$ ./detect.sh [*.jpg | *.mp4]	[full | tiny | custom]
-
-
-5. Use opencv_createsamples to generate train images. Do as follow steps
-
-	(also check https://github.com/deaplearn/image_sample.git)
-
-		*  Prepare compile environment
-			
-				```
-					sudo su
-					apt-get update
-					apt-get upgrade
-					apt-get install git
-					Compiler: 
-						apt-get install build-essential
-					Libraries: 
-						apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
-					Python bindings and such:
-						apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libdc1394-22-dev
-					OpenCV development library:
-						apt-get install libopencv-dev
-				```
-
-		*  Download and compile the opencv. 
-			https://github.com/deaplearn/opencv.git
-
-		*  Download negative/background images from http://image-net.org.
-
-		*  Download and label object images. crop the target object.
-
-		*  Generate sample images.
-
-		*  Convert label info to yolo format.
+		Run ./detect.sh to test image/video 
 
 
-6. Synthesize tarin images by python-opencv
+5. Synthesize tarin images by python-opencv
 	
 	> 	check simple_synthesize.py in https://github.com/deaplearn/image_sample.git
 
-		example:
-		$python3 simple_synthesize.py -bg ./neg/scale_100/ -t ./objects/scale/
+		*  Download negative/background images from http://image-net.org.
+			
+			$python3 download_imgs.py
+
+		*  Download and label object images with labelImg, save to './Lables/'. crop the target object.
+			
+			$python3 cutapple.py
+
+		*  Generate sample images.
+			
+			$python3 simple_synthesize.py -bg ./neg/scale_100/ -t ./objects/scale/
 
 
-7. Test the model. check https://github.com/deaplearn/yolo_opencv.git
-	
-	>	Run ./detect.sh to test image/video 
+
 
 
 
